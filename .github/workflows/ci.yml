@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Build packages
+        run: npm run build
+        
+  validate-examples:
+    name: Validate Examples
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Check example structure
+        run: |
+          for dir in examples/*/; do
+            if [ -d "$dir" ]; then
+              echo "Checking $dir"
+              [ -f "$dir/README.md" ] || (echo "Missing README.md in $dir" && exit 1)
+              [ -f "$dir/package.json" ] || (echo "Missing package.json in $dir" && exit 1)
+            fi
+          done
+          
+      - name: Install and test examples
+        run: |
+          for dir in examples/*/; do
+            if [ -d "$dir" ]; then
+              echo "Testing $dir"
+              cd "$dir"
+              npm install
+              npm test || true
+              cd ../..
+            fi
+          done

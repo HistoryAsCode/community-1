@@ -1,0 +1,26 @@
+{
+  "name": "@historyascode/example-ocr-preprocessing",
+  "version": "1.0.0",
+  "description": "Image preprocessing techniques for historical document OCR",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "process": "node src/index.js",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "ocr",
+    "preprocessing",
+    "historical-documents",
+    "image-processing"
+  ],
+  "author": "History as Code",
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

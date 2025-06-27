@@ -1,0 +1,42 @@
+{
+  "name": "@historyascode/community",
+  "version": "1.0.0",
+  "description": "History as Code community resources - examples, templates, and tools",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "examples/*",
+    "templates/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "example:new": "node tools/create-example.js",
+    "template:new": "node tools/create-template.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HistoryAsCode/community.git"
+  },
+  "keywords": [
+    "history",
+    "digital-humanities",
+    "ocr",
+    "archives",
+    "genealogy"
+  ],
+  "author": "History as Code",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HistoryAsCode/community/issues"
+  },
+  "homepage": "https://github.com/HistoryAsCode/community#readme",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
